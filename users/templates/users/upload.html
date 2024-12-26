@@ -1,0 +1,69 @@
+{% extends "main/header2.html" %}
+{% load static %}
+{% block content %}
+
+<h2 style="text-align: center; padding-top: 2%; color: rgb(218, 16, 16);">Upload Your Music</h2>
+
+<section class="container">
+    <div class="image-section">
+        <div class="image-wrapper">
+         <img src="{% static 'images/bg.png' %}" alt="Logo">
+      </div>
+ 
+        <div class="content-container">
+          <h1 class="section-heading">Online Music Player <span>System.</span></h1>
+          <p class="section-paragraph">Upload Page</p>
+        </div>
+      </div>
+
+<div class="container my-1">
+    <form action="/users/upload" enctype="multipart/form-data" method="POST">{% csrf_token %}
+        <div class="form-group">
+          <label for="exampleInputEmail1">Your Music Name</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name" placeholder="Your Song Name">
+        </div>
+        
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Singer Name</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="singer" placeholder="Singer Name">
+          </div>
+
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Tags :</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tag" placeholder="Tags (Seperate By Commas)">
+          </div>
+
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Image: (Associated With Your Music)</label>
+            <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="image" placeholder="Upload an Image">
+          </div>    
+
+
+        <div class="form-group">
+          <label for="exampleInputPassword1">Movie Name</label>
+          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Movie name in which this song is their" name="movie">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Credit</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Add Credit Link" name="credit">
+          </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Example file input</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file">
+          </div>
+        
+    <div style="padding-top: 3%; padding-bottom: 3%;">
+        <button type="submit" class="btn btn-primary">Upload...</button>
+    </div>
+      </form>
+    </div>
+
+</section>
+<!-- partial -->
+{% endblock content %}
+

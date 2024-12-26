@@ -1,0 +1,42 @@
+{% extends "main/header.html" %}
+{% load static %}
+{% block content %}
+
+<h2 style="text-align: center; padding-top: 2%; color: rgb(218, 16, 16);">Channel: {{channel.name}}</h2>
+
+<div class="row" style="padding: 2%; padding-left: 4%;">
+  {% for i in song %}
+  <div class="col-md-4" style="padding-bottom: 2%;">
+    <div class="card" style="width: 18rem;">
+      <img src="/media/{{i.image}}" class="card-img-top" alt="{{i.name}}">
+      <div class="card-body">
+        <h5 class="card-title" style="color: chocolate; font-weight: 550;">{{i.name}}</h5>
+        <p class="card-text">{{i.tags}}</p>
+
+        <div class="container">
+          {% if user.is_authenticated %}
+            <form action="/users/history" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="music_id" value="{{i.song_id}}">
+              <a href="/users/songs/{{i.song_id}}">
+                <button class="btn btn-outline-danger" style="margin-bottom: 4%;">Listen Song</button>
+              </a>
+            </form>
+            <!-- Check if the current user uploaded the song -->
+            <a href="{% url 'update_song' song_id=i.song_id %}">
+              <button class="btn btn-outline-primary" style="margin-bottom: 4%;">Update Song</button>
+            </a>
+          {% else %}
+            <a href="/users/songs/{{i.song_id}}" style="margin-bottom: 4%;">
+              <button class="btn btn-outline-danger">Listen Song</button>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<!-- partial -->
+{% endblock content %}
+

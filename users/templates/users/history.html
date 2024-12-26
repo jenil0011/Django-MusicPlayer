@@ -1,0 +1,27 @@
+{% extends "main/header.html" %}
+{% load static %}
+{% block content %}
+<h2 style="padding-left: 8%; padding-top: 2%; font-family: 'verdana';">History</h2>
+
+{% if history|length < 1 %}
+  <h3 style="text-align: center; padding-top: 5%;">You have no Audio in your History</h3>
+{% endif %}
+
+<div class="row" style="padding: 2%; padding-left: 4%;">
+  {% for i in history reversed %}
+  <div class="col-md-4" style="padding-bottom: 2%;">
+    <div class="card" style="width: 18rem;">
+      <img src="{{i.image.url}}" class="card-img-top" alt="{{i.name}}">
+      <div class="card-body">
+        <h5 class="card-title" style="color: green; font-weight: 550;">{{i.name}}</h5>
+        <p class="card-text">Tags: {{i.tags}}</p>
+        <p class="card-text">Movie: {{i.movie}}</p>
+        <a href="/users/songs/{{i.song_id}}">
+          <button class="btn btn-outline-danger">Listen Song</button>
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

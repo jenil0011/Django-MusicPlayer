@@ -1,0 +1,35 @@
+{% extends "main/header.html" %}
+{% load static %}
+{% block content %}
+<!-- <h1>SONGS</h1> -->
+<div class="container">
+
+    <div style="padding-top: 3%; padding-bottom: 2%; font-size: 200%; font-style: italic; color: #ff3030;">
+        Your Search Result For : {{query}}
+    </div>
+
+{% for i in songs %} 
+<div class="card mb-3" style="max-width: 940px; padding-top: 3%;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="/media/{{i.image}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title" style="color: chocolate; font-weight: 550;">{{i.name}}</h5>
+          <p class="card-text">{{i.tags}}</p>
+          {% if user.is_authenticated %}  
+          <form action="/users/history" method="POST">{% csrf_token %}
+            <input type="hidden" name="music_id" value="{{i.song_id}}">
+        <a href="/users/songs/{{i.song_id}}"><button class="btn btn-outline-danger">Listen Song</button></a>
+      </form>
+      {% else %}
+      <a href="/users/songs/{{i.song_id}}"><button class="btn btn-outline-danger">Listen Song</button></a>
+      {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+ {% endfor %}
+</div> 
+{% endblock content %}

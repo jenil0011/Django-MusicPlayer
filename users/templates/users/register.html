@@ -1,0 +1,112 @@
+{% extends "main/header2.html" %}
+{% load static %}
+{% block content %}
+<section class="container">
+    <div class="image-section">
+       <div class="image-wrapper">
+        <img src="{% static 'images/spyder.png' %}" alt="Logo">
+     </div>
+
+       <div class="content-container">
+         <h1 class="section-heading">Online Music Player <span>System.</span></h1>
+         <p class="section-paragraph">Registeration Page</p>
+       </div>
+     </div>
+
+  
+
+   <div class="form-section">
+   <div class="form-wrapper">
+     <div class="logo-container">
+       <a href="#" class="logo-container">
+        <img src="{% static 'images/logo.png' %}" alt="Logo">
+        </a>
+     </div>
+
+     <h2>Register Here! 🎸</h2>
+     <p>Enter your credentials to Register your account.</p>
+     <form method="POST" class="border p-3 rounded">
+        {% csrf_token %}
+     <div class="input-container">
+       <div class="form-group">
+        <label for="id_first_name">First Name:</label>
+        {{ form.first_name }}
+        {% if form.first_name.errors %}
+            <ul class="text-danger">
+                {% for error in form.first_name.errors %}
+                    <li>{{ error|escape }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+       </div>
+         <div class="form-group">
+            <label for="id_last_name">Last Name:</label>
+            {{ form.last_name }}
+            {% if form.last_name.errors %}
+                <ul class="text-danger">
+                    {% for error in form.last_name.errors %}
+                        <li>{{ error|escape }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+       <div class="form-group">
+        <label for="id_username">Username:</label>
+        {{ form.username }}
+        {% if form.username.errors %}
+            <ul class="text-danger">
+                {% for error in form.username.errors %}
+                    <li>{{ error|escape }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+       <div class="form-group">
+        <label for="id_email">Email:</label>
+        {{ form.email }}
+        {% if form.email.errors %}
+            <ul class="text-danger">
+                {% for error in form.email.errors %}
+                    <li>{{ error|escape }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+       <div class="form-group">
+        <label for="id_password1">Password:</label>
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+            <ul class="text-danger">
+                {% for error in form.password1.errors %}
+                    <li>{{ error|escape }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="id_password2">Password confirmation:</label>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+                <ul class="text-danger">
+                    {% for error in form.password2.errors %}
+                        <li>{{ error|escape }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-info">Register</button>
+        </div>
+
+       <div class="form-group-text">
+        <small class="text-muted">
+            <b>Have An Account?</b> <a class="ml-2" href="{% url 'login' %}">Sign In here</a>
+        </small>
+        </div>
+       </div>
+       </form>
+     </div>
+
+   </div>
+</section>
+{% endblock content %}
